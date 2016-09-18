@@ -21,13 +21,12 @@ namespace MEFModularDesign
 
     public interface ISorter // heeft een calculate functie. bv 2+ 2 = string 4.
     {
-        int Calculate(String input);
+        List<int> sort(List<myPerson> geladenFile);
     }
 
 
     class Program
     {
-        private CompositionContainer _container;
 
         [Import(typeof(ILoader))]
         public ILoader FileLoader;
@@ -35,19 +34,32 @@ namespace MEFModularDesign
         [Import(typeof(ISorter))]
         public ISorter FileSorter;
 
+        private CompositionContainer _container;
 
         static void Main(string[] args)
         {
             // blijft hij doen zolang er input is van de gebruiker
             Program p = new Program(); //Composition is performed in the constructor
-            List<myPerson> a = p.FileLoader.load();
-            foreach (var item in a)
+
+
+
+
+            List<myPerson> geladenFile = p.FileLoader.load();
+            foreach (var item in geladenFile)
             {
                 Console.WriteLine(item.age);
-
             }
             Console.ReadKey();
 
+
+
+
+            List<int> gesorteerd = p.FileSorter.sort(geladenFile);
+            foreach (var item in gesorteerd)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadKey();
         }
 
         private Program()

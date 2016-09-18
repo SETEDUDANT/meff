@@ -15,7 +15,6 @@ namespace LoadDLL
     {
         public List<myPerson> load()
         {
-            // List<int> addLeeftijd = new List<int>();
             string text = File.ReadAllText(@"C:\Users\Murat\Documents\Visual Studio 2015\Projects\Jeerjaar2\c sharp\MEFModularDesign\MyJson.json");
             List<myPerson> readPerson = JsonConvert.DeserializeObject<List<myPerson>>(text);
 
